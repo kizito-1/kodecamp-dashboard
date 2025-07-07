@@ -10,7 +10,7 @@ const Login = () => {
 
   return (
     <div>
-      <button onClick={() => setCount(count++)}>click me</button>
+     
     </div>
   )
 }

@@ -16,10 +16,9 @@ const Dashboard = () => {
   };
 
   return (
-          <div className="border-t border-gray-200 p-4">
+          <div>
             <button
               onClick={handleLogout}
-              className="group flex w-full items-center px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md"
             >
               Sign out
             </button>

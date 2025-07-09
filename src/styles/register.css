@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* border: 1px solid; */
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.header-links {
+    display: flex;
+    gap: 20px;
+}
+
+.register-section {
+    display: flex;
+    justify-content: center;
+    min-height: 98.5vh;
+    align-items: center;
+}
+
+.register-header a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    padding: 5px 0;
+    border-bottom: 2px solid #EF498F;
+}
+
+.login-header a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+
+.register-socials {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.apple-social,
+.fb-social,
+.google-social {
+    padding: 15px 15px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(236, 244, 244);
+}
+
+.register-container {
+    width: 40%;
+    /* background-color: blueviolet; */
+    padding: 16px 24px;
+    border-radius: 10px;
+    box-shadow: 0px 17px 30px 10px #5C636B14;
+}
+
+.reg-text p{
+    color: #1A071066;
+    margin-bottom: 10px;
+}
+
+.email-input input,
+.password-input input {
+    width: 100%;
+    outline: none;
+    border: 1px solid #DDDDDD;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.create-btn button {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    background-color: #5932EA;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.checkbox span{
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.terms{
+    margin-top: 30px;
+    text-align: center;
+    font-size: 11px;
+    color: #1A071066;
+}
+
+.terms-2{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 11px;
+    color: #1A071066;
+}
+
+.terms a,
+.terms-2 a {
+    color: #6471f8;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    body{
+        background-color: aqua;
+    }
+}

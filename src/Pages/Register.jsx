@@ -28,9 +28,7 @@ const Register = () => {
             </div>
 
             <div className="close">
-              <Link to="/">
-                <IoCloseSharp size={25} />
-              </Link>
+              <IoCloseSharp size={25} />
             </div>
           </div>
 
@@ -60,7 +58,7 @@ const Register = () => {
                 type="text"
                 placeholder="Password"
                 value={showPassword ? password : getMaskedPassword(password)}
-                onChange={e => {
+                onChange={(e) => {
                   if (showPassword) {
                     setPassword(e.target.value);
                   } else {
@@ -81,12 +79,18 @@ const Register = () => {
                 tabIndex={0}
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
-                {showPassword ? <IoEyeOffOutline size={20} /> : <IoEyeOutline size={20} />}
+                {showPassword ? (
+                  <IoEyeOffOutline size={20} />
+                ) : (
+                  <IoEyeOutline size={20} />
+                )}
               </span>
             </div>
 
             <div className="create-btn">
-              <button type="submit">Create account</button>
+              <Link to={"/register/personal-info"}>
+                <button type="submit">Create account</button>
+              </Link>
             </div>
 
             <div className="checkbox">

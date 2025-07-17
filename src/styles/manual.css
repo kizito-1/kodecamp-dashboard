@@ -39,6 +39,12 @@
     text-decoration: none;
 }
 
+.manual-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
 .code-input {
     display: flex;
     gap: 10px;

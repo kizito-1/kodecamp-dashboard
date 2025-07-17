@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { IoCloseSharp } from "react-icons/io5";
-import { MdOutlineInfo } from "react-icons/md";
 import { CiLocationOn } from "react-icons/ci";
 import { MdOutlinePeople } from "react-icons/md";
 import { GoClock } from "react-icons/go";
 import { FiDollarSign } from "react-icons/fi";
+import * as Yup from "yup";
 import "../styles/add.css";
 
 const Add = () => {
@@ -21,19 +21,14 @@ const Add = () => {
 
             <div className="close">
               <Link to={"/register/personal-info"}>
-              <IoCloseSharp size={25} />
+                <IoCloseSharp size={25} />
               </Link>
             </div>
           </div>
 
           <form>
             <div className="search-input">
-              <input
-                type="search"
-                placeholder="Search for address"
-                name=""
-                id
-              />
+              <input type="search" placeholder="Search for address" name="" id />
 
               <p>Search query is required</p>
             </div>

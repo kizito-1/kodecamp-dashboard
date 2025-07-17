@@ -1,19 +1,41 @@
-import React, {useState} from "react";
-import { Link } from "react-router-dom";
-import { IoCloseSharp } from "react-icons/io5"
-import { IoLogoApple } from "react-icons/io5"
-import {FcGoogle} from "react-icons/fc"
-import {FaFacebookF} from "react-icons/fa"
-import {IoEyeOffOutline} from "react-icons/io5"
-import {IoEyeOutline} from "react-icons/io5"
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { IoCloseSharp, IoLogoApple } from "react-icons/io5";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebookF } from "react-icons/fa";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/config";
 import '../styles/login.css';
 
 const Login = () => {
- const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
-  // Show stars for each character, but never update state with stars
-  const getMaskedPassword = (value) => "*".repeat(value.length);
+  const initialValues = {
+    email: "",
+    password: "",
+    news: false,
+  };
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string().required("Password is required"),
+    news: Yup.boolean(),
+  });
+
+  const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
+    try {
+      await signInWithEmailAndPassword(auth, values.email, values.password);
+      navigate("/dashboard");
+    } catch (error) {
+      setFieldError("email", "Invalid email or password");
+      console.log(error);
+    }
+    setSubmitting(false);
+  };
 
   return (
     <>
@@ -28,9 +50,10 @@ const Login = () => {
                 <Link to="/login">Login</Link>
               </div>
             </div>
-
-            <div className="close">
+            <div className="auth-header-close">
+              <Link to="/">
                 <IoCloseSharp size={25} />
+              </Link>
             </div>
           </div>
 
@@ -50,50 +73,70 @@ const Login = () => {
             <p>or login with email</p>
           </div>
 
-          <form>
-            <div className="email-input">
-              <input type="email" placeholder="Email address" />
-            </div>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ isSubmitting, values, setFieldValue }) => (
+              <Form>
+                <div className="email-input">
+                  <Field
+                    type="email"
+                    name="email"
+                    placeholder="Email address"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="form-error"
+                  />
+                </div>
 
-            <div className="password-input password-input-group">
-              <input
-                type="text"
-                placeholder="Password"
-                value={showPassword ? password : getMaskedPassword(password)}
-                onChange={e => {
-                  if (showPassword) {
-                    setPassword(e.target.value);
-                  } else {
-                    const prevLength = password.length;
-                    const newLength = e.target.value.length;
-                    if (newLength > prevLength) {
-                      setPassword(password + e.target.value.slice(-1));
-                    } else if (newLength < prevLength) {
-                      setPassword(password.slice(0, -1));
-                    }
-                  }
-                }}
-                autoComplete="new-password"
-              />
-              <span
-                onClick={() => setShowPassword(!showPassword)}
-                className="toggle-password-visibility"
-                tabIndex={0}
-                aria-label={showPassword ? "Hide password" : "Show password"}
-              >
-                {showPassword ? <IoEyeOffOutline size={20} /> : <IoEyeOutline size={20} />}
-              </span>
-            </div>
+                <div className="password-input password-input-group">
+                  <Field
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Password"
+                  />
+                  <span
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="toggle-password-visibility"
+                    tabIndex={0}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? (
+                      <IoEyeOffOutline size={20} />
+                    ) : (
+                      <IoEyeOutline size={20} />
+                    )}
+                  </span>
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="form-error"
+                  />
+                </div>
 
-            <div className="create-btn">
-              <button type="submit">Login to Dashboard</button>
-            </div>
+                <div className="create-btn">
+                  <button type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "Logging in..." : "Login to Dashboard"}
+                  </button>
+                </div>
 
-            <div className="checkbox">
-              <input type="checkbox" id="news" />
-              <span>Remember Me</span>
-            </div>
-          </form>
+                <div className="checkbox">
+                  <Field
+                    type="checkbox"
+                    name="news"
+                    id="news"
+                    checked={values.news}
+                    onChange={() => setFieldValue("news", !values.news)}
+                  />
+                  <span>Remember Me</span>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </div>
       </section>
     </>

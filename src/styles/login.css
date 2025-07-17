@@ -16,6 +16,10 @@
     gap: 20px;
 }
 
+.form-error{
+    color: red;
+}
+
 .register-section {
     display: flex;
     justify-content: center;

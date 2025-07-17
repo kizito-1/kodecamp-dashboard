@@ -1,19 +1,16 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
-// TODO: Replace with your Firebase configuration
-// Get this from your Firebase project settings
 const firebaseConfig = {
-  apiKey: "AIzaSyATaSfPLtU8LnmZsNOBpug5AZYfyBUHDZs",
-  authDomain: "kodecamp-dashboard.firebaseapp.com",
-  projectId: "kodecamp-dashboard",
-  storageBucket: "kodecamp-dashboard.firebasestorage.app",
-  messagingSenderId: "655368898634",
-  appId: "1:655368898634:web:99a894c65273d84eb5beb3",
-  measurementId: "G-0WPH0YMFT3"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export default app; 
